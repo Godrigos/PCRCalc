@@ -1,0 +1,22 @@
+{
+    "ITS": {
+        "_comment": "Internal transcribed spacer refers to the spacer DNA situated between the small-subunit ribosomal RNA and large-subunit rRNA genes in the chromosome or the corresponding transcribed region in the polycistronic rRNA precursor transcript.",
+        "Initial Denaturation": {"s": 75, "C": 95},
+        "Denaturation": {"s": 30, "C": 95},
+        "Annealing": {"s": 30, "C": 55},
+        "Extension": {"s": 75, "C": 72},
+        "Number of Cycles": 35,
+        "Final Extension": {"m": 10, "C": 72},
+        "Hold": {"s": "Forever", "C": 4}
+    },
+    "16S rRNA": {
+        "_comment": "16S ribosomal RNA is the component of the 30S small subunit of a prokaryotic ribosome that binds to the Shine-Dalgarno sequence.",
+        "Initial Denaturation": {"s": 120, "C": 96},
+        "Denaturation": {"s": 60, "C": 95},
+        "Annealing": {"s": 60, "C": 55},
+        "Extension": {"s": 120, "C": 72},
+        "Number of Cycles": 30,
+        "Final Extension": {"m": 5, "C": 72},
+        "Hold": {"s": "Forever", "C": 4}
+    }
+}
