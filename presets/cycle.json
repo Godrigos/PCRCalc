@@ -1,4 +1,14 @@
 {
+    "": {
+        "_comment": "Model to clear data.",
+        "Initial Denaturation": {"s": 0, "C": 0},
+        "Denaturation": {"s": 0, "C": 0},
+        "Annealing": {"s": 0, "C": 0},
+        "Extension": {"s": 0, "C": 0},
+        "Number of Cycles": 0,
+        "Final Extension": {"m": 0, "C": 0},
+        "Hold": {"s": 0, "C": 0}
+    },
     "ITS": {
         "_comment": "Internal transcribed spacer refers to the spacer DNA situated between the small-subunit ribosomal RNA and large-subunit rRNA genes in the chromosome or the corresponding transcribed region in the polycistronic rRNA precursor transcript.",
         "Initial Denaturation": {"s": 75, "C": 95},

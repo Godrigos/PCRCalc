@@ -25,7 +25,7 @@ from PCR import Application
 
 
 root = Tk()
-root.geometry('720x480')
+root.geometry('700x480')
 root.resizable(width=False, height=False)
 root.title("PCR Calculator")
 style = ThemedStyle(root)

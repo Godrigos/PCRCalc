@@ -1,3 +1,4 @@
 json
 tkinter
 ttkthemes
+PIL

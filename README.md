@@ -9,4 +9,4 @@ It is a [Python 3](https://www.python.org) application
 with a GUI built using Tkinter.
 
 More information on the application usage, can be found
-[here](https://github.com/Godrigos/PCRCalc/wiki). 
+[here](https://github.com/Godrigos/PCRCalc/wiki).
