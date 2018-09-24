@@ -6,6 +6,8 @@ from tkinter.ttk import *
 from tkinter.font import nametofont
 from PIL import ImageTk
 from PIL import Image
+from duration import duration
+
 
 with open('./presets/cycle.json', 'r') as fc:
     cycle = load(fc)
@@ -25,27 +27,33 @@ def callback(p):
 class Application:
     """Define GUI elements."""
     def __init__(self, master):
-        master = master
         self.default_font = nametofont("TkDefaultFont")
         self.default_font.configure(family="Helvetica", size=10)
         self.cb_font = Style()
         self.cb_font.configure('TCheckbutton', font=('Helvetica', 8))
 
         self.cb_val = StringVar(value="")
-        self.fexten_val = StringVar(value='0')
-        self.fexten_val2 = StringVar(value='0')
-        self.id_val = StringVar(value='0')
-        self.id_val2 = StringVar(value='0')
-        self.d_val = StringVar(value='0')
-        self.d_val2 = StringVar(value='0')
-        self.anneal_val = StringVar(value='0')
-        self.anneal_val2 = StringVar(value='0')
-        self.exten_val = StringVar(value='0')
-        self.exten_val2 = StringVar(value='0')
-        self.cycle_val = StringVar(value='0')
+        self.fexten_val = DoubleVar(value=0)
+        self.fexten_val2 = DoubleVar(value=0)
+        self.id_val = DoubleVar(value=0)
+        self.id_val2 = DoubleVar(value=0)
+        self.d_val = DoubleVar(value=0)
+        self.d_val2 = DoubleVar(value=0)
+        self.anneal_val = DoubleVar(value=0)
+        self.anneal_val2 = DoubleVar(value=0)
+        self.exten_val = DoubleVar(value=0)
+        self.exten_val2 = DoubleVar(value=0)
+        self.cycle_val = DoubleVar(value=0)
+        self.total_time = StringVar(value='0h 00m 00s')
         self.check_val = IntVar(value=0)
 
         self.cb_val.trace_add('write', self.locus_value)
+        self.id_val.trace_add('write', self.locus_value)
+        self.d_val.trace_add('write', self.locus_value)
+        self.anneal_val.trace_add('write', self.locus_value)
+        self.exten_val.trace_add('write', self.locus_value)
+        self.cycle_val.trace_add('write', self.locus_value)
+        self.fexten_val.trace_add('write', self.locus_value)
 
         vcmd = (master.register(callback))
 
@@ -171,7 +179,7 @@ class Application:
         self.lcb.grid(row=8, column=0)
         self.cb = Combobox(self.framer, textvariable=self.cb_val, values=[k for k in cycle.keys()])
         self.cb.configure(state=DISABLED, width=20)
-        self.cb.grid(row=8, column=1, padx=1, pady=1, columnspan=7)
+        self.cb.grid(row=8, column=1, pady=2, columnspan=7)
 
         self.cycle_lab = Label(self.framer, text="PCR Cycle", font=("Helvetica", 10, "bold"))
         self.cycle_lab.grid(row=1, column=0, columnspan=8)
@@ -254,19 +262,34 @@ class Application:
         self.fexten_temp = Label(self.framer, text='\u00b0C', font=("Helvetica", 8))
         self.fexten_temp.grid(row=6, column=4, pady=2)
 
+        self.duration_lab = Label(self.framer, text="Minimum Run Time:", width=17, anchor=W)
+        self.duration_lab.grid(row=10, column=0, pady=2)
+        self.duration = Label(self.framer, textvariable=self.total_time, width=17, anchor=W)
+        self.duration.grid(row=10, column=1, columnspan=7)
+
     def locus_value(self, *args):
-        data = cycle[self.cb_val.get()]
-        self.fexten_val.set(data['Final Extension']['m'])
-        self.fexten_val2.set(data['Final Extension']['C'])
-        self.id_val.set(data['Initial Denaturation']['s'])
-        self.id_val2.set(data['Initial Denaturation']['C'])
-        self.d_val.set(data['Denaturation']['s'])
-        self.d_val2.set(data['Denaturation']['C'])
-        self.anneal_val.set(data['Annealing']['s'])
-        self.anneal_val2.set(data['Annealing']['C'])
-        self.exten_val.set(data['Extension']['s'])
-        self.exten_val2.set(data['Extension']['C'])
-        self.cycle_val.set(data['Number of Cycles'])
+        if self.check_val.get() == 1:
+            data = cycle[self.cb_val.get()]
+            self.fexten_val.set(data['Final Extension']['m'])
+            self.fexten_val2.set(data['Final Extension']['C'])
+            self.id_val.set(data['Initial Denaturation']['s'])
+            self.id_val2.set(data['Initial Denaturation']['C'])
+            self.d_val.set(data['Denaturation']['s'])
+            self.d_val2.set(data['Denaturation']['C'])
+            self.anneal_val.set(data['Annealing']['s'])
+            self.anneal_val2.set(data['Annealing']['C'])
+            self.exten_val.set(data['Extension']['s'])
+            self.exten_val2.set(data['Extension']['C'])
+            self.cycle_val.set(data['Number of Cycles'])
+            self.total_time.set(duration(self))
+        else:
+            self.id_val.set(self.init_denat_entry.get())
+            self.d_val.set(self.denat_entry.get())
+            self.anneal_val.set(self.anneal_entry.get())
+            self.exten_val.set(self.exten_entry.get())
+            self.cycle_val.set(self.cycles_entry.get())
+            self.fexten_val.set(self.fexten_entry.get())
+            self.total_time.set(duration(self))
         for arg in args:
             del arg
 
@@ -301,18 +324,6 @@ class Cycle:
         self.cycles_number = cycle_num  # integer
         self.final_extension = final_exten*60  # minutes (converted to seconds) and Celsius
         self.hold = hold  # infinite at 4 C
-
-    def duration(self):
-        """Sum and return the minimum total time expected for PCR cycle."""
-        total_sec = (self.initial_denaturation +
-                     self.cycles_number * (self.denaturation +
-                                           self.annealing +
-                                           self.extension) +
-                     self.final_extension)
-        total_min = total_sec // 60
-        total_hours = total_min // 60
-        total_time = (str(total_hours) + 'h ' + "%02d" % (total_min % 60) + 'm ' + "%02d" % (total_sec % 60) + 's')
-        return total_time
 
 
 class Stock:
