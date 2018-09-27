@@ -25,9 +25,10 @@ from PCR import Application
 
 
 root = Tk()
-root.geometry('700x480')
+root.geometry('685x330')
 root.resizable(width=False, height=False)
 root.title("PCR Calculator")
+root.option_add('*TCombobox*Listbox.font', ('Arial', 8))
 style = ThemedStyle(root)
 style.set_theme("clearlooks") # Windows version should use "vista" for a more native experience
 Application(root)
