@@ -12,11 +12,12 @@ def report(self):
 
         width, height = (5 * cm, 8 * cm)
         c = canvas.Canvas(file,  pagesize=(width, height))
+        c.setTitle("PCRCalc Output")
         textmix = c.beginText()
         textmix.setFont("Helvetica", 10)
         textmix.setTextOrigin(10, (height-15))
 
-        textmix.textLine(f"A mix of {self.react_num_entry.get()} reactions need:")
+        textmix.textLine(f"{self.react_num_entry.get()} reactions of {self.react_vol_entry.get()} \u03bcL need:")
         textmix.textLine("")
         textmix.textLine(f"Buffer:      {round(self.final_mix['Buffer'], 3)} \u03bcL")
         textmix.textLine(f"DNTPs:    {round(self.final_mix['DNTPs'], 3)} \u03bcL")
