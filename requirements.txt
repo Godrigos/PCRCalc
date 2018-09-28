@@ -2,3 +2,4 @@ json
 tkinter
 ttkthemes
 PIL
+reportlab
