@@ -1,7 +1,5 @@
 from tkinter import *
 from tkinter.ttk import *
-from PIL import ImageTk
-from PIL import Image
 from report import report
 from tkinter.messagebox import showwarning
 
@@ -133,35 +131,7 @@ def mix(self):
                         justify=CENTER, anchor=CENTER, wraplength=140, foreground='red')
         dna_lab.grid(row=13, column=0, rowspan=2, columnspan=3)
 
-        Separator(frame, orient=VERTICAL).grid(row=0, column=3, rowspan=15, sticky="ns", padx=10, pady=0)
-
-        if self.duration['text'] == '0h 00m 00s':
-            Label(frame, text="You have not defined a PCR Cycle!", justify=CENTER, anchor=CENTER,
-                  wraplength=140).grid(row=0, column=4, rowspan=15, columnspan=3)
-        else:
-            Label(frame, text=f"Initial Denaturation: {self.init_denat_entry.get()} s at {self.init_denat_entry2.get()}"
-                              f" \u00b0C", width=30, anchor=W).grid(row=1, column=4, columnspan=4)
-            Label(frame, text=f"Denaturation: {self.denat_entry.get()} s at {self.denat_entry2.get()}"
-                              f" \u00b0C", width=23, anchor=W).grid(row=2, column=4, columnspan=2)
-            Label(frame, text=f"Annealing: {self.anneal_entry.get()} s at {self.anneal_entry2.get()}"
-                              f" \u00b0C", width=23, anchor=W).grid(row=3, column=4, columnspan=2)
-            Label(frame, text=f"Extension: {self.exten_entry.get()} s at {self.exten_entry2.get()}"
-                              f" \u00b0C", width=23, anchor=W).grid(row=4, column=4, columnspan=2)
-            Label(frame, text=f"{self.cycles_entry.get()}").grid(row=3, column=7)
-            Label(frame, text=f"Final Extension: {self.fexten_entry.get()} m at {self.fexten_entry2.get()}"
-                              f" \u00b0C", width=30, anchor=W).grid(row=5, column=4, columnspan=4)
-            Label(frame, text="Hold: Forever at 4 \u00b0C", width=30, anchor=W).grid(row=6, column=4, columnspan=4)
-
-            img = Image.open("./images/brace.png")
-            img = img.resize((20, 70), Image.ANTIALIAS)
-            img = ImageTk.PhotoImage(img)
-            brackets = Label(frame, image=img)
-            brackets.image = img
-            brackets.grid(row=2, column=6, rowspan=3)
-
-            Label(frame, text=f"Minimum Run Time: {self.duration['text']}").grid(row=10, column=4, columnspan=4)
-
         save = Button(frame, text="Save", command=lambda: report(self))
-        save.grid(row=15, column=0, columnspan=3, pady=(5, 5))
+        save.grid(row=15, column=0, columnspan=1, pady=5, padx=2)
         close = Button(frame, text="Close", command=self.window.destroy)
-        close.grid(row=15, column=4, columnspan=3, pady=(5, 5))
+        close.grid(row=15, column=2, columnspan=1, pady=5, padx=2)
