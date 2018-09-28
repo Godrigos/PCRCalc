@@ -5,12 +5,25 @@ from reportlab.lib.units import cm
 from reportlab.lib import colors
 
 
+def y(self):
+    x = 6.4
+    if self.final_mix['Primer 3'] != 0:
+        x += 0.4
+    if self.final_mix['Primer 4'] != 0:
+        x += 0.4
+    if self.final_mix['Glycerol'] != 0:
+        x += 0.4
+    if self.final_mix['DMSO'] != 0:
+        x += 0.4
+    return x
+
+
 def report(self):
     try:
         file = asksaveasfilename(parent=self.window, defaultextension=".pdf", initialdir=Path.home(),
                                  filetypes=[("PDF files", "*.pdf")], title="Select a directory and enter a filename")
 
-        width, height = (5 * cm, 8 * cm)
+        width, height = (5 * cm, y(self) * cm)
         c = canvas.Canvas(file,  pagesize=(width, height))
         c.setTitle("PCRCalc Output")
         textmix = c.beginText()

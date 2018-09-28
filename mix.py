@@ -23,14 +23,14 @@ def mix(self):
     mix_volume = (buffer + dntps + mgcl2 + primer1 + primer2 + primer3 + primer4 + taq + glycerol + dmso + h2o)
 
     if h2o < 0:
-        showwarning("Wrong values!", "Your PCR concentrations have values that are not possible to acheive in the mix!")
+        showwarning("Wrong values!", "Your PCR concentrations have values that are not possible to achieve in the mix!")
     else:
         self.final_mix = {'Buffer': buffer, 'DNTPs': dntps, 'MgCl2': mgcl2, 'Primer 1': primer1, 'Primer 2': primer2,
                           'Primer 3': primer3, 'Primer 4': primer4, 'Taq': taq, 'Glycerol': glycerol, 'DMSO': dmso,
                           'H2O': h2o, 'Mix Total': mix_volume}
 
         for value in self.final_mix:
-            self.final_mix[value] *= float(self.react_num_entry.get())
+            self.final_mix[value] *= int(self.react_num_entry.get())
 
         self.window = Toplevel(master=None)
         self.window.resizable(width=False, height=False)
@@ -78,19 +78,21 @@ def mix(self):
         p2_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
         p2_lab_unit.grid(row=5, column=2)
 
-        p3_lab = Label(frame, text="Primer 3:", width=8, anchor=W)
-        p3_lab.grid(row=6, column=0)
-        p3_lab_val = Label(frame, text=f" {round(self.final_mix['Primer 3'], 3)} ", width=6, anchor=E)
-        p3_lab_val.grid(row=6, column=1)
-        p3_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
-        p3_lab_unit.grid(row=6, column=2)
+        if self.final_mix['Primer 3'] != 0:
+            p3_lab = Label(frame, text="Primer 3:", width=8, anchor=W)
+            p3_lab.grid(row=6, column=0)
+            p3_lab_val = Label(frame, text=f" {round(self.final_mix['Primer 3'], 3)} ", width=6, anchor=E)
+            p3_lab_val.grid(row=6, column=1)
+            p3_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
+            p3_lab_unit.grid(row=6, column=2)
 
-        p4_lab = Label(frame, text="Primer 4:", width=8, anchor=W)
-        p4_lab.grid(row=7, column=0)
-        p4_lab_val = Label(frame, text=f" {round(self.final_mix['Primer 4'], 3)} ", width=6, anchor=E)
-        p4_lab_val.grid(row=7, column=1)
-        p4_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
-        p4_lab_unit.grid(row=7, column=2)
+        if self.final_mix['Primer 4'] != 0:
+            p4_lab = Label(frame, text="Primer 4:", width=8, anchor=W)
+            p4_lab.grid(row=7, column=0)
+            p4_lab_val = Label(frame, text=f" {round(self.final_mix['Primer 4'], 3)} ", width=6, anchor=E)
+            p4_lab_val.grid(row=7, column=1)
+            p4_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
+            p4_lab_unit.grid(row=7, column=2)
 
         taq_lab = Label(frame, text="Taq:", width=8, anchor=W)
         taq_lab.grid(row=8, column=0)
@@ -99,19 +101,21 @@ def mix(self):
         taq_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
         taq_lab_unit.grid(row=8, column=2)
 
-        gly_lab = Label(frame, text="Glycerol:", width=8, anchor=W)
-        gly_lab.grid(row=9, column=0)
-        gly_lab_val = Label(frame, text=f" {round(self.final_mix['Glycerol'], 3)} ", width=6, anchor=E)
-        gly_lab_val.grid(row=9, column=1)
-        gly_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
-        gly_lab_unit.grid(row=9, column=2)
+        if self.final_mix['Glycerol'] != 0:
+            gly_lab = Label(frame, text="Glycerol:", width=8, anchor=W)
+            gly_lab.grid(row=9, column=0)
+            gly_lab_val = Label(frame, text=f" {round(self.final_mix['Glycerol'], 3)} ", width=6, anchor=E)
+            gly_lab_val.grid(row=9, column=1)
+            gly_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
+            gly_lab_unit.grid(row=9, column=2)
 
-        dmso_lab = Label(frame, text="DMSO:", width=8, anchor=W)
-        dmso_lab.grid(row=10, column=0)
-        dmso_lab_val = Label(frame, text=f" {round(self.final_mix['DMSO'], 3)} ", width=6, anchor=E)
-        dmso_lab_val.grid(row=10, column=1)
-        dmso_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
-        dmso_lab_unit.grid(row=10, column=2)
+        if self.final_mix['DMSO'] != 0:
+            dmso_lab = Label(frame, text="DMSO:", width=8, anchor=W)
+            dmso_lab.grid(row=10, column=0)
+            dmso_lab_val = Label(frame, text=f" {round(self.final_mix['DMSO'], 3)} ", width=6, anchor=E)
+            dmso_lab_val.grid(row=10, column=1)
+            dmso_lab_unit = Label(frame, text='\u03bcL', width=2, anchor=W)
+            dmso_lab_unit.grid(row=10, column=2)
 
         h2o_lab = Label(frame, text="H₂O:", width=8, anchor=W)
         h2o_lab.grid(row=11, column=0)
