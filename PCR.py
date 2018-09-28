@@ -9,12 +9,14 @@ from PIL import Image
 from duration import duration
 from sys import exit
 from mix import mix
+from os.path import dirname, join
 
+dirname = dirname(__file__)
 
-with open('./presets/cycle.json', 'r') as fc:
+with open(join(dirname, 'presets/cycle.json'), 'r') as fc:
     cycle = load(fc)
 
-with open('./presets/stock.json', 'r') as fs:
+with open(join(dirname, 'presets/stock.json'), 'r') as fs:
     stock = load(fs)
 
 
@@ -380,7 +382,7 @@ class Application:
         self.exten_temp = Label(self.framer, text='\u00b0C', font=("Arial", 8))
         self.exten_temp.grid(row=5, column=4, pady=2)
 
-        img = Image.open("./images/brace.png")
+        img = Image.open(join(dirname, "images/brace.png"))
         img = img.resize((20, 75), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(img)
         self.brackets = Label(self.framer, image=img)
