@@ -12,6 +12,7 @@ setuptools.setup(
     author_email='',
     description='A PCR Mix Calculator',
     long_description=long_description,
+    entry_points={'gui_scripts': ["PCRCalc = ui.py"]},
     package_data={
         '': ['images/*.png', 'presets/*.json', 'pcrcalc.ico'],
     },
@@ -23,3 +24,4 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
 )
+
