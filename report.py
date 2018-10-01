@@ -3,10 +3,11 @@ from pathlib import Path
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import cm
 from reportlab.lib import colors
+from datetime import datetime
 
 
 def y(self):
-    x = 6.4
+    x = 6.8
     if self.final_mix['Primer 3'] != 0:
         x += 0.4
     if self.final_mix['Primer 4'] != 0:
@@ -22,14 +23,14 @@ def report(self):
     try:
         file = asksaveasfilename(parent=self.window, defaultextension=".pdf", initialdir=Path.home(),
                                  filetypes=[("PDF files", "*.pdf")], title="Select a directory and enter a filename")
-
         width, height = (5 * cm, y(self) * cm)
         c = canvas.Canvas(file,  pagesize=(width, height))
         c.setTitle("PCRCalc Output")
         textmix = c.beginText()
         textmix.setFont("Helvetica", 10)
         textmix.setTextOrigin(10, (height-15))
-
+        timedate = datetime.now().strftime("%Y.%b.%d - %Hh %Mm %Ss")
+        textmix.textLine(f"{timedate}")
         textmix.textLine(f"{self.react_num_entry.get()} reactions of {self.react_vol_entry.get()} \u03bcL need:")
         textmix.textLine("")
         textmix.textLine(f"Buffer:      {round(self.final_mix['Buffer'], 3)} \u03bcL")
