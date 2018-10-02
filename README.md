@@ -10,3 +10,5 @@ with a GUI built using Tkinter.
 
 More information on the application usage, can be found
 [here](https://github.com/Godrigos/PCRCalc/wiki).
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=DP9T5DXR2KTKA&lc=US&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
