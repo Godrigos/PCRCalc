@@ -288,7 +288,7 @@ class Application:
         self.taq_react_entry = Entry(self.framel, width=7, justify='right', textvariable=self.taq_react,
                                      validate='all', validatecommand=(vcmd, '%P'), font=("Arial", 10))
         self.taq_react_entry.grid(row=11, column=5)
-        self.taq_react_unit = Label(self.framel, text='U', font=("Arial", 8), width=6, anchor=W)
+        self.taq_react_unit = Label(self.framel, text='U/\u03bcL', font=("Arial", 8), width=6, anchor=W)
         self.taq_react_unit.grid(row=11, column=6)
 
         self.dna_react_lab = Label(self.framel, text="DNA:", width=8, anchor=W)
