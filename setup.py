@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='PCRCalc',
-    version='1.0.3',
+    version='1.0.4',
     url='https://github.com/Godrigos/PCRCalc',
     license='GPL-3.0',
     author='Rodrigo Aluizio',
