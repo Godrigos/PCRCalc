@@ -147,5 +147,5 @@ def mix(self):
             close.grid(row=15, column=2, columnspan=1, pady=5, padx=2)
     except ZeroDivisionError:
         showwarning("Division by zero!", "Some of your stock concentrations have zero value!")
-    except ValueError:
+    except (ValueError, TclError):
         showwarning("Blank field!", "You have one or more fields in blank!")
