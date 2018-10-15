@@ -23,7 +23,7 @@ def report(self):
     try:
         file = asksaveasfilename(parent=self.window, defaultextension=".pdf", initialdir=Path.home(),
                                  filetypes=[("PDF files", "*.pdf")], title="Select a directory and enter a filename")
-        width, height = (5 * cm, y(self) * cm)
+        width, height = (5.4 * cm, y(self) * cm)
         c = canvas.Canvas(file,  pagesize=(width, height))
         c.setTitle("PCRCalc Output")
         textmix = c.beginText()
